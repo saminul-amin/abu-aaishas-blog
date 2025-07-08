@@ -182,7 +182,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={() => handleNavigation("/blog")}
-              className="group relative px-8 py-4 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              className="group relative px-8 py-4 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2 cursor-pointer"
             >
               <BookOpen className="w-5 h-5" />
               Explore Posts
@@ -190,7 +190,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => handleNavigation("/about")}
-              className="px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300"
+              className="px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 cursor-pointer"
             >
               About Me
             </button>
@@ -260,13 +260,13 @@ export default function Home() {
                     <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">
-                          <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+                          <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors cursor-pointer">
                             <Heart className="w-5 h-5" />
                             <span className="text-sm font-medium">
                               {post.likes}
                             </span>
                           </button>
-                          <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+                          <button className="flex items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors cursor-pointer">
                             <BookOpen className="w-5 h-5" />
                             <span className="text-sm font-medium">
                               {post.comments} comments
@@ -275,7 +275,7 @@ export default function Home() {
                         </div>
                         <button
                           onClick={() => handleNavigation(`/blog/${post.id}`)}
-                          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-all"
+                          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-all cursor-pointer"
                         >
                           Continue reading
                           <ArrowRight className="w-4 h-4" />
@@ -342,7 +342,7 @@ export default function Home() {
               </p>
               <button
                 onClick={() => handleNavigation("/about")}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
                 Learn More About Me
                 <ArrowRight className="w-5 h-5" />
@@ -364,7 +364,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => handleNavigation("/contact")}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
             >
               <Heart className="w-5 h-5" />
               Contact Me

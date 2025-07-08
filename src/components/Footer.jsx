@@ -54,7 +54,7 @@ export default function Footer() {
         }
       `}</style>
 
-      <footer className="relative bg-gradient-to-br from-gray-50 via-slate-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-700 dark:text-gray-300 mt-20">
+      <footer className="relative bg-gradient-to-br from-gray-50 via-slate-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-700 dark:text-gray-300">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -70,7 +70,7 @@ export default function Footer() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent"></div>
 
         {/* Main Footer Content */}
-        <div className="relative max-w-7xl mx-auto px-4 py-16">
+        <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-4">
           {/* Top Section */}
           <div className="text-center mb-12 animate-fadeInUp">
             {/* Logo/Brand */}
@@ -155,7 +155,7 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="relative mb-8">
+          <div className="relative mb-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300 dark:border-gray-700"></div>
             </div>
@@ -180,11 +180,6 @@ export default function Footer() {
                 <span>and dedication</span>
               </p>
             </div>
-
-            {/* Bengla name */}
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 font-[SolaimanLipi]">
-              আমার নাম সামিন
-            </p>
           </div>
         </div>
 

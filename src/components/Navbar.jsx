@@ -39,6 +39,19 @@ export default function Navbar() {
       </li>
       <li>
         <NavLink
+          to="/all-posts"
+          className={({ isActive }) =>
+            `${navLinkClass} ${
+              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
+            }`
+          }
+        >
+          All Posts
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/about"
           className={({ isActive }) =>
             `${navLinkClass} ${
@@ -52,40 +65,27 @@ export default function Navbar() {
       </li>
       <li>
         <NavLink
-          to="/blog"
+          to="/sign-in"
           className={({ isActive }) =>
             `${navLinkClass} ${
               isActive ? activeClass : "text-gray-600 dark:text-gray-300"
             }`
           }
         >
-          Blog
+          Sign In
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/categories"
+          to="/sign-in"
           className={({ isActive }) =>
             `${navLinkClass} ${
               isActive ? activeClass : "text-gray-600 dark:text-gray-300"
             }`
           }
         >
-          Categories
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/contact-me"
-          className={({ isActive }) =>
-            `${navLinkClass} ${
-              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
-            }`
-          }
-        >
-          Contact
+          Sign Up
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
         </NavLink>
       </li>
@@ -162,7 +162,7 @@ export default function Navbar() {
                   aria-label="Toggle Dark Mode"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-slate-200 rounded-full blur opacity-40"></div>
-                  <div className="relative">
+                  <div className="relative cursor-pointer">
                     {darkMode ? (
                       <Sun size={20} className="text-yellow-500" />
                     ) : (
@@ -221,14 +221,20 @@ export default function Navbar() {
                   >
                     {darkMode ? (
                       <>
-                        <Sun size={20} className="text-yellow-500" />
+                        <Sun
+                          size={20}
+                          className="text-yellow-500 cursor-pointer"
+                        />
                         <span className="text-gray-700 dark:text-gray-300">
                           Light Mode
                         </span>
                       </>
                     ) : (
                       <>
-                        <Moon size={20} className="text-gray-700" />
+                        <Moon
+                          size={20}
+                          className="text-gray-700 cursor-pointer"
+                        />
                         <span className="text-gray-700 dark:text-gray-300">
                           Dark Mode
                         </span>
