@@ -12,6 +12,7 @@ import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import ErrorElement from "./pages/ErrorElement.jsx";
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "post/:id",
         element: <Post />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
     ],
   },
