@@ -8,42 +8,49 @@ import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import Post from "./pages/Post.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import AuthProvider from "./providers/AuthProvider.jsx";
+import ErrorElement from "./pages/ErrorElement.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "contact-me",
-        element: <Contact />
+        element: <Contact />,
       },
       {
         path: "sign-in",
-        element: <Contact />
+        element: <SignIn />,
       },
       {
         path: "sign-up",
-        element: <Contact />
+        element: <SignUp />,
       },
       {
         path: "all-posts",
-        element: <AllPosts />
+        element: <AllPosts />,
       },
       {
         path: "post/:id",
-        element: <Post />
-      }
-    ]
+        element: <Post />,
+      },
+    ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

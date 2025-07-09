@@ -70,9 +70,9 @@ export default function Footer() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent"></div>
 
         {/* Main Footer Content */}
-        <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-4">
+        <div className="relative max-w-7xl mx-auto px-4 pt-8 pb-4">
           {/* Top Section */}
-          <div className="text-center mb-12 animate-fadeInUp">
+          <div className="text-center mb-8 animate-fadeInUp">
             {/* Logo/Brand */}
             <div className="relative inline-block mb-6">
               <div className="absolute -inset-4 bg-gradient-to-r from-gray-300 to-slate-300 rounded-2xl blur-xl opacity-20 animate-pulse-custom"></div>
@@ -87,7 +87,7 @@ export default function Footer() {
             </div>
 
             {/* Tagline */}
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed">
               Sharing reflections, reminders, and practical insights rooted in
               faith and simplicity.
             </p>
@@ -143,7 +143,7 @@ export default function Footer() {
             <div className="mb-8">
               <button
                 onClick={scrollToTop}
-                className="group relative px-6 py-3 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="group relative px-6 py-3 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-slate-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">

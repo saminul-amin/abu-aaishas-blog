@@ -7,6 +7,7 @@ import {
   Star,
   User,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const posts = [
   {
@@ -63,9 +64,11 @@ const categories = [
 
 export default function Home() {
   const [hoveredPost, setHoveredPost] = useState(null);
+  const navigate = useNavigate();
 
   const handleNavigation = (path) => {
     console.log(`Navigating to: ${path}`);
+    navigate(`${path}`);
   };
 
   return (
@@ -363,7 +366,7 @@ export default function Home() {
               from you!
             </p>
             <button
-              onClick={() => handleNavigation("/contact")}
+              onClick={() => handleNavigation("/contact-me")}
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
             >
               <Heart className="w-5 h-5" />

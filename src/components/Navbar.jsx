@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, LogOut } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { user, userLogOut } = useAuth();
 
   useEffect(() => {
     if (darkMode) {
@@ -17,10 +19,59 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
+  const handleSignOut = () => {
+    userLogOut();
+    setIsOpen(false); // Close mobile menu after sign out
+  };
+
   const navLinkClass =
     "relative px-4 py-2 font-medium transition-all duration-300 hover:text-gray-800 dark:hover:text-white group";
 
   const activeClass = "text-gray-800 dark:text-white font-semibold";
+
+  const authLinks = user?.email ? (
+    // Show Sign Out button when user is authenticated
+    <li>
+      <button
+        onClick={handleSignOut}
+        className={`${navLinkClass} text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 flex items-center gap-2`}
+      >
+        <LogOut size={16} />
+        Sign Out
+        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-red-600 to-red-400 group-hover:w-full transition-all duration-300"></span>
+      </button>
+    </li>
+  ) : (
+    // Show Sign In and Sign Up buttons when user is not authenticated
+    <>
+      <li>
+        <NavLink
+          to="/sign-in"
+          className={({ isActive }) =>
+            `${navLinkClass} ${
+              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
+            }`
+          }
+        >
+          Sign In
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/sign-up"
+          className={({ isActive }) =>
+            `${navLinkClass} ${
+              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
+            }`
+          }
+        >
+          Sign Up
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
+        </NavLink>
+      </li>
+    </>
+  );
 
   const links = (
     <>
@@ -63,32 +114,7 @@ export default function Navbar() {
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/sign-in"
-          className={({ isActive }) =>
-            `${navLinkClass} ${
-              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
-            }`
-          }
-        >
-          Sign In
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/sign-in"
-          className={({ isActive }) =>
-            `${navLinkClass} ${
-              isActive ? activeClass : "text-gray-600 dark:text-gray-300"
-            }`
-          }
-        >
-          Sign Up
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-gray-600 to-slate-600 group-hover:w-full transition-all duration-300"></span>
-        </NavLink>
-      </li>
+      {authLinks}
     </>
   );
 
