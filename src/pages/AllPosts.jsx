@@ -9,123 +9,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Filter,
+  Eye,
 } from "lucide-react";
-
-// Extended posts data (you can move this to a separate data file)
-const allPosts = [
-  {
-    id: 1,
-    title: "Reflections on Faith and Simplicity",
-    excerpt:
-      "In our modern world filled with constant distractions and endless pursuits, there's something profoundly beautiful about choosing simplicity. Today I want to share some thoughts on how faith has guided me toward a more intentional way of living.",
-    content:
-      "Living simply doesn't mean living poorly or without joy. Rather, it means being deliberate about what we allow into our lives and hearts. When we strip away the unnecessary, we create space for what truly matters: our relationship with Allah, meaningful connections with others, and personal growth that aligns with our values. I've found that the most peaceful moments in my day come not from acquiring something new, but from appreciating what I already have and remembering that all blessings come from the Most High.",
-    date: "June 1, 2025",
-    readTime: "5 min read",
-    category: "Faith",
-    author: "Abu Aaisha",
-    likes: 24,
-    comments: 8,
-  },
-  {
-    id: 2,
-    title: "A Day in the Life: Intentional Routines",
-    excerpt:
-      "How creating small, meaningful habits can transform not just our productivity, but our entire sense of peace and purpose in daily life.",
-    content:
-      "I used to think that routines were restrictive, but I've come to understand that they're actually liberating. When we establish good habits, we free our minds from constantly making decisions about the basics, allowing us to focus on what's truly important. My morning routine now includes reading a few pages of the Qur'an, spending time in reflection, and setting intentions for the day. These small acts have become anchors that keep me grounded, no matter what challenges the day might bring. The beauty of intentional routines is that they compound over time, creating a life that feels both structured and spiritually nourishing.",
-    date: "May 20, 2025",
-    readTime: "7 min read",
-    category: "Productivity",
-    author: "Abu Aaisha",
-    likes: 18,
-    comments: 5,
-  },
-  {
-    id: 3,
-    title: "Lessons from the Qur'an on Patience",
-    excerpt:
-      "What Surah Yusuf taught me about enduring with purpose, finding strength in difficulty, and trusting in Allah's perfect timing.",
-    content:
-      "The story of Prophet Yusuf (peace be upon him) is one of the most beautiful narratives in the Qur'an, and it's taught me so much about patience - not just waiting, but waiting with purpose and trust. When Yusuf was thrown into the well by his brothers, sold into slavery, and later imprisoned for a crime he didn't commit, he could have become bitter or lost hope. Instead, he maintained his faith and character through every trial. What strikes me most is that his patience wasn't passive; it was active and filled with good deeds, kindness to others, and unwavering trust in Allah. This teaches us that true patience isn't about gritting our teeth through hardship, but about finding ways to grow, serve, and maintain our spiritual connection even in the darkest moments.",
-    date: "May 10, 2025",
-    readTime: "6 min read",
-    category: "Qur'an",
-    author: "Abu Aaisha",
-    likes: 31,
-    comments: 12,
-  },
-  {
-    id: 4,
-    title: "The Art of Gratitude in Daily Life",
-    excerpt:
-      "How practicing gratitude has transformed my perspective and brought more joy and contentment to everyday moments.",
-    content:
-      "Gratitude isn't just about saying 'thank you' more often; it's about cultivating a mindset that recognizes the countless blessings that surround us every day. In Islam, we're taught that gratitude increases our blessings, and I've experienced this truth firsthand. When I started keeping a gratitude journal, writing down three things I was thankful for each day, I began to notice beauty and mercy in places I had previously overlooked. The warmth of morning sunlight, the taste of clean water, the comfort of a safe home - these simple gifts became sources of profound joy when I learned to truly see them.",
-    date: "April 25, 2025",
-    readTime: "4 min read",
-    category: "Reflections",
-    author: "Abu Aaisha",
-    likes: 22,
-    comments: 7,
-  },
-  {
-    id: 5,
-    title: "Building Meaningful Relationships",
-    excerpt:
-      "Thoughts on cultivating deep, authentic connections in an age of superficial interactions and digital distractions.",
-    content:
-      "In our hyperconnected world, we often find ourselves more isolated than ever. True friendship requires time, vulnerability, and genuine care for one another's wellbeing. I've learned that meaningful relationships aren't built through constant texting or social media interactions, but through shared experiences, honest conversations, and being present for each other during both joyful and difficult times. The Prophet (peace be upon him) taught us that a true friend is like a mirror - they help us see ourselves clearly and encourage us to become better people.",
-    date: "April 15, 2025",
-    readTime: "6 min read",
-    category: "Life Lessons",
-    author: "Abu Aaisha",
-    likes: 19,
-    comments: 9,
-  },
-  {
-    id: 6,
-    title: "Finding Purpose in Small Actions",
-    excerpt:
-      "Why the smallest acts of kindness and service can have the greatest impact on our spiritual development.",
-    content:
-      "We often think that making a difference requires grand gestures or monumental achievements. But I've come to understand that it's the small, consistent actions that truly shape our character and impact the world around us. Smiling at a stranger, helping a neighbor carry groceries, listening to someone who needs to talk - these seemingly minor acts are actually profound forms of worship when done with sincere intention. Every small kindness is a prayer in action, a way of reflecting Allah's mercy in our daily interactions.",
-    date: "April 5, 2025",
-    readTime: "5 min read",
-    category: "Faith",
-    author: "Abu Aaisha",
-    likes: 27,
-    comments: 11,
-  },
-  {
-    id: 7,
-    title: "The Beauty of Imperfection",
-    excerpt:
-      "Learning to embrace our flaws and find peace in the journey of continuous growth and self-improvement.",
-    content:
-      "Perfectionism can be a beautiful motivator, but it can also become a prison. I used to think that I needed to have everything figured out before I could share my thoughts or help others. But I've learned that our struggles and imperfections are often what make us most relatable and useful to others. When we're honest about our journey - the mistakes, the setbacks, the moments of doubt - we create space for others to be honest about theirs. This authenticity is what builds real community and genuine connection.",
-    date: "March 28, 2025",
-    readTime: "7 min read",
-    category: "Reflections",
-    author: "Abu Aaisha",
-    likes: 25,
-    comments: 14,
-  },
-  {
-    id: 8,
-    title: "Lessons from Nature",
-    excerpt:
-      "What the natural world teaches us about patience, resilience, and the wisdom of divine creation.",
-    content:
-      "Every time I spend time in nature, I'm reminded of the incredible wisdom embedded in Allah's creation. Trees grow slowly but surely, seasons change in perfect timing, and every creature has its role in the greater ecosystem. There's something humbling about watching a seed grow into a mighty tree, or observing how rivers carve through mountains over time. Nature teaches us about patience, persistence, and trust in divine timing. It reminds us that growth happens gradually, that there's beauty in every season of life, and that we're part of something much larger than ourselves.",
-    date: "March 20, 2025",
-    readTime: "6 min read",
-    category: "Reflections",
-    author: "Abu Aaisha",
-    likes: 20,
-    comments: 6,
-  },
-];
+import useAxios from "../hooks/useAxios";
 
 const categories = [
   "All",
@@ -140,16 +26,39 @@ export default function AllPosts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filteredPosts, setFilteredPosts] = useState(allPosts);
+  const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const postsPerPage = 6;
 
+  // Fetch posts from API
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await useAxios.get("/posts");
+        setPosts(response.data);
+        setFilteredPosts(response.data);
+      } catch (err) {
+        setError("Failed to fetch posts. Please try again later.");
+        console.error("Error fetching posts:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   // Filter posts based on search and category
   useEffect(() => {
-    setIsLoading(true);
+    if (!posts.length) return;
+
     const timer = setTimeout(() => {
-      let filtered = allPosts;
+      let filtered = posts;
 
       if (selectedCategory !== "All") {
         filtered = filtered.filter(
@@ -162,17 +71,19 @@ export default function AllPosts() {
           (post) =>
             post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            post.content.toLowerCase().includes(searchTerm.toLowerCase())
+            post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            post.tags.some((tag) =>
+              tag.toLowerCase().includes(searchTerm.toLowerCase())
+            )
         );
       }
 
       setFilteredPosts(filtered);
       setCurrentPage(1);
-      setIsLoading(false);
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, posts]);
 
   // Pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -188,8 +99,64 @@ export default function AllPosts() {
   };
 
   const handleNavigation = (path) => {
-    console.log(`Navigating to: ${path}`);
+    // In a real app, you'd use React Router here
+    window.location.href = path;
   };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const handleLike = async (postId) => {
+    try {
+      await useAxios.post(`/posts/${postId}/like`);
+      // Update local state
+      setPosts(
+        posts.map((post) =>
+          post._id === postId
+            ? {
+                ...post,
+                engagement: {
+                  ...post.engagement,
+                  likes: {
+                    ...post.engagement.likes,
+                    count: post.engagement.likes.count + 1,
+                  },
+                },
+              }
+            : post
+        )
+      );
+    } catch (err) {
+      console.error("Error liking post:", err);
+    }
+  };
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-slate-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <BookOpen className="w-8 h-8 text-red-500" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            Something went wrong
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-gray-600 text-white rounded-full font-medium hover:bg-gray-700 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-slate-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -277,7 +244,7 @@ export default function AllPosts() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentPosts.map((post, index) => (
                 <article
-                  key={post.id}
+                  key={post._id}
                   className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   style={{
                     animationDelay: `${index * 0.1}s`,
@@ -295,15 +262,21 @@ export default function AllPosts() {
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                           <Calendar className="w-3 h-3" />
-                          <span>{post.date}</span>
+                          <span>{formatDate(post.createdAt)}</span>
                           <span>•</span>
                           <span>{post.readTime}</span>
                         </div>
                       </div>
                     </div>
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
-                      {post.category}
-                    </span>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                        {post.category}
+                      </span>
+                      <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                        <Eye className="w-3 h-3" />
+                        <span>{post.engagement.views}</span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Post Content */}
@@ -331,20 +304,44 @@ export default function AllPosts() {
                       {post.excerpt}
                     </p>
 
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 text-xs bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                      {post.tags.length > 3 && (
+                        <span className="px-2 py-1 text-xs bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded">
+                          +{post.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+
                     {/* Post Footer */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
                       <div className="flex items-center gap-4">
-                        <button className="flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+                        <button
+                          onClick={() => handleLike(post._id)}
+                          className="flex items-center gap-1 text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors"
+                        >
                           <Heart className="w-4 h-4" />
-                          <span className="text-xs">{post.likes}</span>
+                          <span className="text-xs">
+                            {post.engagement.likes.count}
+                          </span>
                         </button>
                         <button className="flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
                           <BookOpen className="w-4 h-4" />
-                          <span className="text-xs">{post.comments}</span>
+                          <span className="text-xs">
+                            {post.engagement.comments.count}
+                          </span>
                         </button>
                       </div>
                       <button
-                        onClick={() => handleNavigation(`/blog/${post.id}`)}
+                        onClick={() => handleNavigation(`/post/${post.slug}`)}
                         className="inline-flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm transition-all"
                       >
                         Read more
