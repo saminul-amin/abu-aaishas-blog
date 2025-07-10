@@ -106,13 +106,13 @@ export default function Footer() {
               </Link>
 
               <Link
-                to="/blog"
+                to="/all-posts"
                 className="group relative px-6 py-3 font-medium transition-all duration-300 hover:text-gray-800 dark:hover:text-white"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-700 dark:to-gray-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex items-center gap-2">
                   <BookOpen className="w-4 h-4" />
-                  Blog
+                  Posts
                 </div>
               </Link>
 

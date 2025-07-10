@@ -12,6 +12,7 @@ import {
   Eye,
 } from "lucide-react";
 import useAxios from "../hooks/useAxios";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "All",
@@ -30,6 +31,7 @@ export default function AllPosts() {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const postsPerPage = 6;
 
@@ -100,7 +102,8 @@ export default function AllPosts() {
 
   const handleNavigation = (path) => {
     // In a real app, you'd use React Router here
-    window.location.href = path;
+    navigate(`${path}`);
+    // window.location.href = path;
   };
 
   const formatDate = (dateString) => {
@@ -134,6 +137,11 @@ export default function AllPosts() {
     } catch (err) {
       console.error("Error liking post:", err);
     }
+  };
+
+  // Helper function to get Bengali font class
+  const getBengaliFont = (language) => {
+    return language === "bn" ? "font-[SolaimanLipi]" : "";
   };
 
   if (error) {
@@ -269,7 +277,7 @@ export default function AllPosts() {
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                      <span className={`inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full ${getBengaliFont(post.language)}`}>
                         {post.category}
                       </span>
                       <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
@@ -282,7 +290,7 @@ export default function AllPosts() {
                   {/* Post Content */}
                   <div className="p-6">
                     <h3
-                      className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors"
+                      className={`text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors ${getBengaliFont(post.language)}`}
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 2,
@@ -293,7 +301,7 @@ export default function AllPosts() {
                       {post.title}
                     </h3>
                     <p
-                      className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed"
+                      className={`text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed ${getBengaliFont(post.language)}`}
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 3,
@@ -309,7 +317,7 @@ export default function AllPosts() {
                       {post.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded"
+                          className={`px-2 py-1 text-xs bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded ${getBengaliFont(post.language)}`}
                         >
                           #{tag}
                         </span>
@@ -342,7 +350,7 @@ export default function AllPosts() {
                       </div>
                       <button
                         onClick={() => handleNavigation(`/post/${post.slug}`)}
-                        className="inline-flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm transition-all"
+                        className="inline-flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm transition-all cursor-pointer"
                       >
                         Read more
                         <ArrowRight className="w-4 h-4" />

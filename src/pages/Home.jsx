@@ -19,7 +19,7 @@ const defaultCategories = [
   {
     name: "Reflections",
     icon: BookOpen,
-    color: "from-stone-400 to-stone-5000",
+    color: "from-stone-400 to-stone-500",
   },
   { name: "Qur'an", icon: Heart, color: "from-neutral-400 to-neutral-500" },
   { name: "Life Lessons", icon: User, color: "from-zinc-400 to-zinc-500" },
@@ -282,10 +282,6 @@ export default function Home() {
             faith and simplicity.
           </p>
 
-          <p className="text-2xl text-gray-700 dark:text-gray-200 font-[SolaimanLipi] mb-8">
-            আমার নাম সামিন
-          </p>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={() => handleNavigation("/blog")}
@@ -297,14 +293,14 @@ export default function Home() {
             </button>
             <button
               onClick={() => handleNavigation("/about")}
-              className="px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-2300 cursor-pointer"
+              className="px-8 py-4 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 cursor-pointer"
             >
               About Me
             </button>
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 disabled:opacity-50"
+              className="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 cursor-pointer"
             >
               <RefreshCw
                 className={`w-5 h-5 ${refreshing ? "animate-spin" : ""}`}
@@ -361,7 +357,11 @@ export default function Home() {
                             <span>{post.readTime}</span>
                           </div>
                         </div>
-                        <span className="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
+                        <span
+                          className={`px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full ${
+                            post.language === "bn" ? "font-[SolaimanLipi]" : ""
+                          }`}
+                        >
                           {post.category}
                         </span>
                       </div>
@@ -369,11 +369,19 @@ export default function Home() {
 
                     {/* Post Content */}
                     <div className="p-6">
-                      <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
+                      <h3
+                        className={`text-2xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors ${
+                          post.language === "bn" ? "font-[SolaimanLipi]" : ""
+                        }`}
+                      >
                         {post.title}
                       </h3>
 
-                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-lg leading-relaxed">
+                      <p
+                        className={`text-gray-600 dark:text-gray-300 mb-4 text-lg leading-relaxed ${
+                          post.language === "bn" ? "font-[SolaimanLipi]" : ""
+                        }`}
+                      >
                         {post.excerpt}
                       </p>
 
@@ -383,7 +391,11 @@ export default function Home() {
                           {post.tags.slice(0, 3).map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
-                              className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
+                              className={`px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full ${
+                                post.language === "bn"
+                                  ? "font-[SolaimanLipi]"
+                                  : ""
+                              }`}
                             >
                               #{tag}
                             </span>
@@ -437,7 +449,7 @@ export default function Home() {
         {/* Categories */}
         <section className="mb-20">
           <div className="text-center mb-12 animate-fadeInRight">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-3200 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
               Explore Topics
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-gray-400 to-slate-400 mx-auto rounded-full"></div>
