@@ -34,7 +34,7 @@ export default function Navbar() {
     <li>
       <button
         onClick={handleSignOut}
-        className={`${navLinkClass} text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 flex items-center gap-2`}
+        className={`${navLinkClass} text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 flex items-center gap-2 cursor-pointer`}
       >
         <LogOut size={16} />
         Sign Out

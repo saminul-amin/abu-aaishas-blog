@@ -2,18 +2,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Heart } from "lucide-react";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { userSignIn } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-    watch,
+    reset,
   } = useForm({
     defaultValues: {
       email: "",
@@ -27,9 +30,12 @@ export default function SignIn() {
     try {
       await userSignIn(data.email, data.password);
       console.log("Sign in successful!");
-      // Handle successful sign in (redirect, show success message, etc.)
+      reset();
+      toast.success("Successfully Signed In!");
+      handleNavigation("/");
     } catch (error) {
       console.error("Sign in error:", error);
+
       setError("root", {
         type: "manual",
         message: error.message || "Failed to sign in. Please try again.",
@@ -41,6 +47,7 @@ export default function SignIn() {
 
   const handleNavigation = (path) => {
     console.log(`Navigating to: ${path}`);
+    navigate(`${path}`);
   };
 
   return (
@@ -225,7 +232,7 @@ export default function SignIn() {
               type="submit"
               disabled={isLoading}
               className={`group relative w-full px-6 py-3 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
-                isLoading ? "opacity-50 cursor-not-allowed" : ""
+                isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               }`}
             >
               {isLoading ? (

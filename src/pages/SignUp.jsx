@@ -11,12 +11,16 @@ import {
   UserPlus,
 } from "lucide-react";
 import useAuth from "../hooks/useAuth";
+import useAxios from "../hooks/useAxios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -40,20 +44,31 @@ export default function SignUp() {
     setIsLoading(true);
 
     try {
-      // Create user account
-      createUser(data.email, data.password).then((result) => {
-        const user = result.user;
-        console.log(user);
-        updateUserProfile(data.name, null).then(() => {
-          console.log("done");
-          reset();
+      createUser(data.email, data.password)
+        .then((result) => {
+          console.log(result);
+          updateUserProfile(data.name, null).then(() => {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              createdAt: new Date().toISOString(),
+            };
+            useAxios.post("/users", userInfo).then((res) => {
+              toast.success("Account Created Successfully!");
+              reset();
+              handleNavigation("/");
+            });
+          });
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast.error("Email already in use!!");
         });
-      });
-
-      console.log("Sign up successful!");
-      // Handle successful sign up (redirect, show success message, etc.)
     } catch (error) {
       console.error("Sign up error:", error);
+      toast.error(
+        error.message || "Failed to create account. Please try again."
+      );
       setError("root", {
         type: "manual",
         message: error.message || "Failed to create account. Please try again.",
@@ -65,6 +80,7 @@ export default function SignUp() {
 
   const handleNavigation = (path) => {
     console.log(`Navigating to: ${path}`);
+    navigate(`${path}`);
   };
 
   return (
@@ -325,7 +341,7 @@ export default function SignUp() {
               type="submit"
               disabled={isLoading}
               className={`group relative w-full px-6 py-3 bg-gradient-to-r from-gray-600 to-slate-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
-                isLoading ? "opacity-50 cursor-not-allowed" : ""
+                isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               }`}
             >
               {isLoading ? (

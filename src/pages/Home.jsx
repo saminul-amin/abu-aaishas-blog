@@ -271,9 +271,9 @@ export default function Home() {
             <div className="absolute -inset-4 bg-gradient-to-r from-gray-300 via-slate-300 to-stone-300 rounded-2xl blur-xl opacity-20 animate-pulse-custom" />
             <h1 className="relative text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 dark:from-white dark:via-gray-200 dark:to-white bg-clip-text text-transparent">
               Welcome to
-              <span className="block bg-gradient-to-r from-gray-700 via-slate-600 to-stone-700 bg-clip-text text-transparent">
-                Abu Aaisha's Blog
-              </span>
+              <span className="block bg-gradient-to-r from-gray-700 via-slate-600 to-stone-700 dark:from-white dark:via-gray-200 dark:to-white bg-clip-text text-transparent">
+      Abu Aaisha's Blog
+    </span>
             </h1>
           </div>
 
