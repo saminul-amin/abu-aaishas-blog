@@ -11,13 +11,14 @@ import {
   Eye,
 } from "lucide-react";
 import useAxios from "../hooks/useAxios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   renderInlineContent,
   renderMarkdownContent,
 } from "../components/RenderingFunctions";
 import Comments from "../components/Comments";
 import RelatedPosts from "../components/RelatedPosts";
+import useAuth from "../hooks/useAuth";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -27,7 +28,26 @@ export default function Post() {
   const [showComments, setShowComments] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pendingComment, setPendingComment] = useState("");
   const { slug } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  // Check for pending comment after login
+  useEffect(() => {
+    if (user?.email && post?._id) {
+      const storedComment = localStorage.getItem("pendingComment");
+      const storedPostId = localStorage.getItem("pendingCommentPostId");
+
+      if (storedComment && storedPostId === post._id) {
+        setPendingComment(storedComment);
+        setShowComments(true);
+        // Clear the stored comment
+        localStorage.removeItem("pendingComment");
+        localStorage.removeItem("pendingCommentPostId");
+      }
+    }
+  }, [user, post]);
 
   // Fetch post data
   useEffect(() => {
@@ -83,8 +103,7 @@ export default function Post() {
   }, [post?._id]);
 
   const handleNavigation = (path) => {
-    // In a real app, you'd use React Router here
-    window.location.href = path;
+    navigate(`${path}`);
   };
 
   const handleLike = async () => {
@@ -367,7 +386,7 @@ export default function Post() {
           >
             <MessageCircle className="w-5 h-5" />
             <span className="font-semibold">
-              {post.engagement.comments.count}
+              {comments.length}
             </span>
             <span className="hidden sm:inline">
               {post.engagement.comments.count === 1 ? "Comment" : "Comments"}
@@ -398,6 +417,8 @@ export default function Post() {
           setPost={setPost}
           showComments={showComments}
           setShowComments={setShowComments}
+          pendingComment={pendingComment}
+          setPendingComment={setPendingComment}
         />
 
         <RelatedPosts
