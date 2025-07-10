@@ -429,7 +429,7 @@ export default function Home() {
                           </div>
                           <button
                             onClick={() =>
-                              handleNavigation(`/blog/${post.slug || post.id}`)
+                              handleNavigation(`/post/${post.slug || post.id}`)
                             }
                             className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-all cursor-pointer"
                           >

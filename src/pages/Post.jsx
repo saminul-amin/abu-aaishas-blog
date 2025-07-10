@@ -19,6 +19,11 @@ import {
 import Comments from "../components/Comments";
 import RelatedPosts from "../components/RelatedPosts";
 import useAuth from "../hooks/useAuth";
+// Import the view tracker hooks
+import {
+  useViewTracker,
+  useAdvancedViewTracker,
+} from "../hooks/useViewTracker";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -32,6 +37,25 @@ export default function Post() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  // Callback function to update view count in state
+  const handleViewUpdate = (newViewCount) => {
+    setPost((prevPost) => ({
+      ...prevPost,
+      engagement: {
+        ...prevPost.engagement,
+        views: newViewCount,
+      },
+    }));
+  };
+
+  // Use the view tracker hook
+  // Option 1: Basic view tracking (tracks immediately when component loads)
+  useViewTracker(post?._id, user?.email, handleViewUpdate);
+
+  // Option 2: Advanced view tracking (tracks when user scrolls to article)
+  // Uncomment the line below and comment out the line above to use advanced tracking
+  // useAdvancedViewTracker(post?._id, user?.email, handleViewUpdate);
 
   // Check for pending comment after login
   useEffect(() => {
@@ -48,6 +72,44 @@ export default function Post() {
       }
     }
   }, [user, post]);
+
+  // Check for pending like after login
+  useEffect(() => {
+    if (user?.email && post?._id) {
+      const pendingLike = localStorage.getItem("pendingLike");
+      const pendingLikePostId = localStorage.getItem("pendingLikePostId");
+
+      if (pendingLike === "true" && pendingLikePostId === post._id) {
+        // Auto-like the post
+        handleLike();
+        // Clear the pending like
+        localStorage.removeItem("pendingLike");
+        localStorage.removeItem("pendingLikePostId");
+      }
+    }
+  }, [user?.email, post?._id]);
+
+  // Check like status when post and user are loaded
+  useEffect(() => {
+    const checkLikeStatus = async () => {
+      if (!post?._id || !user?.email) {
+        setIsLiked(false);
+        return;
+      }
+
+      try {
+        const response = await useAxios.get(
+          `/posts/${post._id}/like-status?userEmail=${user.email}`
+        );
+        setIsLiked(response.data.isLiked);
+      } catch (err) {
+        console.error("Error checking like status:", err);
+        setIsLiked(false);
+      }
+    };
+
+    checkLikeStatus();
+  }, [post?._id, user?.email]);
 
   // Fetch post data
   useEffect(() => {
@@ -87,48 +149,48 @@ export default function Post() {
     fetchPost();
   }, [slug]);
 
-  // Update view count when post loads
-  useEffect(() => {
-    if (post?._id) {
-      const updateViews = async () => {
-        try {
-          await useAxios.post(`/posts/${post._id}/view`);
-        } catch (err) {
-          console.error("Error updating view count:", err);
-        }
-      };
-
-      updateViews();
-    }
-  }, [post?._id]);
+  // REMOVED: The old view tracking useEffect has been replaced with the custom hook above
 
   const handleNavigation = (path) => {
     navigate(`${path}`);
   };
 
+  // Handle like with user authentication check
   const handleLike = async () => {
     if (!post) return;
 
+    if (!user?.email) {
+      // Store the intent to like after login
+      localStorage.setItem("pendingLike", "true");
+      localStorage.setItem("pendingLikePostId", post._id);
+      navigate("/sign-in");
+      return;
+    }
+
     try {
-      await useAxios.post(`/posts/${post._id}/like`);
+      const response = await useAxios.post(`/posts/${post._id}/like`, {
+        userEmail: user.email,
+      });
 
-      // Update local state
-      setPost((prevPost) => ({
-        ...prevPost,
-        engagement: {
-          ...prevPost.engagement,
-          likes: {
-            ...prevPost.engagement.likes,
-            count: isLiked
-              ? prevPost.engagement.likes.count - 1
-              : prevPost.engagement.likes.count + 1,
+      if (response.data.success) {
+        // Update local state with server response
+        setPost((prevPost) => ({
+          ...prevPost,
+          engagement: {
+            ...prevPost.engagement,
+            likes: {
+              ...prevPost.engagement.likes,
+              count: response.data.newCount,
+            },
           },
-        },
-      }));
+        }));
 
-      setIsLiked(!isLiked);
+        setIsLiked(response.data.isLiked);
+      }
     } catch (err) {
       console.error("Error liking post:", err);
+      // Optionally show error message to user
+      alert("Failed to like post. Please try again.");
     }
   };
 
@@ -154,6 +216,7 @@ export default function Post() {
     });
   };
 
+  // Rest of your component remains the same...
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-slate-50 to-stone-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
@@ -385,9 +448,7 @@ export default function Post() {
             className="flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full font-medium transition-all cursor-pointer"
           >
             <MessageCircle className="w-5 h-5" />
-            <span className="font-semibold">
-              {comments.length}
-            </span>
+            <span className="font-semibold">{comments.length}</span>
             <span className="hidden sm:inline">
               {post.engagement.comments.count === 1 ? "Comment" : "Comments"}
             </span>
